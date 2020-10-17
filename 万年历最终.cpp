@@ -3,30 +3,30 @@
 #include<time.h>
 #include<windows.h>
 
-typedef struct Memday       //½á¹¹ÌåÉè¶¨½Ú¼ÙÈÕµÄ´æ´¢ĞÎÊ½ 
+typedef struct Memday       //ç»“æ„ä½“è®¾å®šèŠ‚å‡æ—¥çš„å­˜å‚¨å½¢å¼ 
 {
 	int m;
 	int	d;
 	char name[5];
 }Memday;
 Memday mem[20];
-char weekdays[][7]={"ĞÇÆÚÈÕ","ĞÇÆÚÒ»","ĞÇÆÚ¶ş","ĞÇÆÚÈı","ĞÇÆÚËÄ","ĞÇÆÚÎå","ĞÇÆÚÁù"};
-char month[][12]={"Ò»ÔÂ","¶şÔÂ","ÈıÔÂ","ËÄÔÂ","ÎåÔÂ","ÁùÔÂ","ÆßÔÂ","°ËÔÂ","¾ÅÔÂ","Ê®ÔÂ","Ê®Ò»ÔÂ","Ê®¶şÔÂ"};
+char weekdays[][7]={"æ˜ŸæœŸæ—¥","æ˜ŸæœŸä¸€","æ˜ŸæœŸäºŒ","æ˜ŸæœŸä¸‰","æ˜ŸæœŸå››","æ˜ŸæœŸäº”","æ˜ŸæœŸå…­"};
+char month[][12]={"ä¸€æœˆ","äºŒæœˆ","ä¸‰æœˆ","å››æœˆ","äº”æœˆ","å…­æœˆ","ä¸ƒæœˆ","å…«æœˆ","ä¹æœˆ","åæœˆ","åä¸€æœˆ","åäºŒæœˆ"};
 int monthday[]={31,28,31,30,31,30,31,31,30,31,30,31,};
-//½«ÊÂÏÈ×¼±¸µÄÎÄ±¾ÖĞµÄ½Ú¼ÙÈÕ¶ÁÈë 
+//å°†äº‹å…ˆå‡†å¤‡çš„æ–‡æœ¬ä¸­çš„èŠ‚å‡æ—¥è¯»å…¥ 
 void festval_txt()
 {
 	int i;
 	FILE *jp;
-	jp=fopen("d:\\½Ú¼ÙÈÕ.txt","r");
+	jp=fopen("d:\\èŠ‚å‡æ—¥.txt","r");
 	if(jp==0)
-	{printf("´ò¿ªÎÄ¼şÊ§°Ü\n");
+	{printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥\n");
 	    exit(0);
 	}
 	for(i=0;i<=20;i++)
 	 fscanf(jp,"%d %d %s",&mem[i].m,&mem[i].d,&mem[i].name);
 }
-//ÅĞ¶ÏÄ³ÌìÊÇ·ñÊÇ½ÚÈÕ£¬ÈôÊÇ£¬ÔòÓÃ½ÚÈÕÊı×éÏÂ±ê·µ»Ø 
+//åˆ¤æ–­æŸå¤©æ˜¯å¦æ˜¯èŠ‚æ—¥ï¼Œè‹¥æ˜¯ï¼Œåˆ™ç”¨èŠ‚æ—¥æ•°ç»„ä¸‹æ ‡è¿”å› 
 int festval(int month,int day,int year) 
 {
 	int i;
@@ -40,19 +40,19 @@ int festval(int month,int day,int year)
     else
      return 30;
 }
-// ´òÓ¡ÈÕÀú£¬²¢½«ÆäĞ´ÈëÖ¸¶¨ÎÄ±¾ÖĞ 
+// æ‰“å°æ—¥å†ï¼Œå¹¶å°†å…¶å†™å…¥æŒ‡å®šæ–‡æœ¬ä¸­ 
 int print(int weekday,int flag,int year)
 {
 	int i,j,k,n,m,festval_number;
 	FILE *fp;
 	int *q,*p;
 	monthday[1]+=flag;
-	fp=fopen("D:\\ÈÕÀú.txt","a+");
+	fp=fopen("D:\\æ—¥å†.txt","a+");
 	if(fp==0)
-	{printf("´ò¿ªÎÄ¼şÊ§°Ü\n");
+	{printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥\n");
 	    exit(0);
 	}
-	for(i=0;i<6;i++)         //½«ÈÕÀúÁ½¸öÔÂÒ»ĞĞÊä³ö£¬¹²Áù´óĞĞ 
+	for(i=0;i<6;i++)         //å°†æ—¥å†ä¸¤ä¸ªæœˆä¸€è¡Œè¾“å‡ºï¼Œå…±å…­å¤§è¡Œ 
 	{
 		int month1[6][7]={0},month2[6][7]={0};
 	    q=&month1[0][weekday];
@@ -103,18 +103,18 @@ int print(int weekday,int flag,int year)
         fputs(" -------------------------------------------------",fp);
         printf("\n");
         fputs("\n",fp);
-		for(n=0;n<6;n++)          //n´ú±íÒ»¸öÔÂµÄĞĞÊı ,Ã¿¸öÔÂ´òÓ¡³öµÄĞĞÊı×î¶àÎªÁùĞĞ
+		for(n=0;n<6;n++)          //nä»£è¡¨ä¸€ä¸ªæœˆçš„è¡Œæ•° ,æ¯ä¸ªæœˆæ‰“å°å‡ºçš„è¡Œæ•°æœ€å¤šä¸ºå…­è¡Œ
 		{
-		    for(m=0;m<7;m++)           //m´ú±íÒ»¸öÔÂµÄÁĞÊı£¬ĞÇÆÚÌìµ½ĞÇÆÚÁù
+		    for(m=0;m<7;m++)           //mä»£è¡¨ä¸€ä¸ªæœˆçš„åˆ—æ•°ï¼Œæ˜ŸæœŸå¤©åˆ°æ˜ŸæœŸå…­
 		    {
-		    	if(month1[n][m]==0)          //Ä³Ò»ĞĞµÄµÚÒ»¸öÔÂ·İµÄÊä³ö
+		    	if(month1[n][m]==0)          //æŸä¸€è¡Œçš„ç¬¬ä¸€ä¸ªæœˆä»½çš„è¾“å‡º
 		    	  {
 		    	  	printf("       ");
 		    	    fputs("       ",fp);
 				  }
 		    	else
 		    	{
-		    		festval_number=festval(2*i+1,month1[n][m],year);       //ÏÈÅĞ¶ÏÕâÒ»ÌìÊÇ·ñÎª½Ú¼ÙÈÕ £¬ÈôÊÇ£¬Êä³ö½Ú¼ÙÈÕÃû³Æ
+		    		festval_number=festval(2*i+1,month1[n][m],year);       //å…ˆåˆ¤æ–­è¿™ä¸€å¤©æ˜¯å¦ä¸ºèŠ‚å‡æ—¥ ï¼Œè‹¥æ˜¯ï¼Œè¾“å‡ºèŠ‚å‡æ—¥åç§°
 		    		if(festval_number<20)
 		    		{
 		    		    printf("%7s",mem[festval_number].name);
@@ -129,7 +129,7 @@ int print(int weekday,int flag,int year)
 			}
 			printf("\t");
 			fputs("\t",fp);
-			for(m=0;m<7;m++)                     //Ä³Ò»ĞĞµÄµÚ¶ş¸öÔÂ·İµÄÊä³ö
+			for(m=0;m<7;m++)                     //æŸä¸€è¡Œçš„ç¬¬äºŒä¸ªæœˆä»½çš„è¾“å‡º
 		    {
 		    	if(month2[n][m]==0)                   
 		    	  {
@@ -159,7 +159,7 @@ int print(int weekday,int flag,int year)
 	} 
 	fclose(fp);
 }
-//ÅĞ¶ÏÊÇ²»ÊÇÈòÄê
+//åˆ¤æ–­æ˜¯ä¸æ˜¯é—°å¹´
 int judge_year(int year) 
 {
 	int k=0;
@@ -167,13 +167,13 @@ int judge_year(int year)
 	  k=1;
 	return k;
 }
-//´òÓ¡Äê·İ
+//æ‰“å°å¹´ä»½
 int yearnumber(int year) 
 {   
     FILE *fp;
-    fp=fopen("D:\\ÈÕÀú.txt","w+");
+    fp=fopen("D:\\æ—¥å†.txt","w+");
     if(fp==0)
-	{printf("´ò¿ªÎÄ¼şÊ§°Ü\n");
+	{printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥\n");
 	    exit(0);
 	}
     char number0[][8]={"  *****","  *   *","  *   *","  *   *","  *****"};
@@ -215,12 +215,12 @@ int yearnumber(int year)
 	}
 	fclose(fp);
 }
-//ÊäÈëÄê·İ£¬²»ÊÇÊı×Ö»òÕßÄê·İ´óÓÚ9999»òÕßÄê·İĞ¡ÓÚ0½«»á±¨´í
+//è¾“å…¥å¹´ä»½ï¼Œä¸æ˜¯æ•°å­—æˆ–è€…å¹´ä»½å¤§äº9999æˆ–è€…å¹´ä»½å°äº0å°†ä¼šæŠ¥é”™
 int putin_year()
 {
     int i,k,len,m=1,year=0;
 	char s[20];
-	printf("\t\t\t\t\t>>ÇëÊäÈëÄúÒª²éÕÒµÄÄê·İ:");
+	printf("\t\t\t\t\t>>è¯·è¾“å…¥æ‚¨è¦æŸ¥æ‰¾çš„å¹´ä»½:");
 	getchar();
 	gets(s);
 	while(s[i]!='\0')
@@ -230,7 +230,7 @@ int putin_year()
 	    {
 	    	i=0;
 	    	printf("\n");
-	    	printf("\t\t\t\t\t>>ÊäÈëÄê·İ´íÎó£¬ÇëÖØĞÂÊäÈë:");
+	    	printf("\t\t\t\t\t>>è¾“å…¥å¹´ä»½é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥:");
 	    	gets(s);
 	    	len=strlen(s);
 		}
@@ -240,7 +240,7 @@ int putin_year()
 	year+=(s[k-1]-48)*m;
     return year;
 }
-//ÔËÓÃ²ÌÀÕ¹«Ê½¼ÆËãÄ³Ò»ÄêµÄ1ÔÂ1ÈÕÊÇĞÇÆÚ¼¸
+//è¿ç”¨è”¡å‹’å…¬å¼è®¡ç®—æŸä¸€å¹´çš„1æœˆ1æ—¥æ˜¯æ˜ŸæœŸå‡ 
 int week(int year)
 {
 	int c,y,w,day;
@@ -256,43 +256,43 @@ int week(int year)
     else
       day=w%7+7;
       printf("\n");
-    printf("\t\t\t\t\t  %dÄêµÄ1ÔÂ1ÈÕÊÇ",year+1);
+    printf("\t\t\t\t\t  %då¹´çš„1æœˆ1æ—¥æ˜¯",year+1);
     puts(weekdays[day]);
 	return day;
 }
-//»ñÈ¡µ±Ç°Ê±¼ä
+//è·å–å½“å‰æ—¶é—´
 void timenow()
 {
 	 time_t t;
 	 struct tm *pt;
 	 time(&t);
 	 pt=localtime(&t);
-	 printf("\n\t\t\t                 ½ñÌìÊÇ%dÄê%dÔÂ%dÈÕ£¬",pt->tm_year+1900,pt->tm_mon+1,pt->tm_mday);
+	 printf("\n\t\t\t                 ä»Šå¤©æ˜¯%då¹´%dæœˆ%dæ—¥ï¼Œ",pt->tm_year+1900,pt->tm_mon+1,pt->tm_mday);
         puts(weekdays[pt->tm_wday]);
-	 printf("\t\t\t                   µ±Ç°Ê±¼äÊÇ%dÊ±%d·Ö%dÃë\n",pt->tm_hour,pt->tm_min,pt->tm_sec);
+	 printf("\t\t\t                   å½“å‰æ—¶é—´æ˜¯%dæ—¶%dåˆ†%dç§’\n",pt->tm_hour,pt->tm_min,pt->tm_sec);
 	printf("\n");
 }
-//²Ëµ¥ 
+//èœå• 
 int menu()
 {
 	int choice;
 	printf("                                       *****************************\n");
 	printf("\n");
-	printf("                                              >> 1.ÄêÀú²éÑ¯\n");
-	printf("                                              >> 2.µ±Ç°Ê±¼ä²éÑ¯\n");
-	printf("                                              >> 3.ÍË³ö³ÌĞò\n");
+	printf("                                              >> 1.å¹´å†æŸ¥è¯¢\n");
+	printf("                                              >> 2.å½“å‰æ—¶é—´æŸ¥è¯¢\n");
+	printf("                                              >> 3.é€€å‡ºç¨‹åº\n");
     printf("\n");
 	printf("                                       *****************************\n");
-	printf("\t\t\t\t\t>>ÇëÑ¡Ôñ£º");
+	printf("\t\t\t\t\t>>è¯·é€‰æ‹©ï¼š");
 	scanf("%d",&choice);
 	return choice;
 }
-//Ö÷º¯Êı 
+//ä¸»å‡½æ•° 
 int main ()
 {
     int year,choice=4,day,flag;
     festval_txt();
-    printf("\t\t\t\t\t   »¶Ó­Ê¹ÓÃÍòÄêÀú²éÑ¯ÏµÍ³£º"); 
+    printf("\t\t\t\t\t   æ¬¢è¿ä½¿ç”¨ä¸‡å¹´å†æŸ¥è¯¢ç³»ç»Ÿï¼š"); 
 	printf("\n");
     while(choice!=3)
     {
@@ -307,7 +307,7 @@ int main ()
 				  break;
     	   case 2:timenow();break;
     	   case 3:break;
-		   default :printf("\t\t\t\t\t>>ÎŞĞ§Ñ¡Ôñ£¬ÇëÖØĞÂÑ¡Ôñ£º\n") ; 
+		   default :printf("\t\t\t\t\t>>æ— æ•ˆé€‰æ‹©ï¼Œè¯·é‡æ–°é€‰æ‹©ï¼š\n") ; 
 	   }
     }
 
